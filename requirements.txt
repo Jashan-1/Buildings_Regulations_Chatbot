@@ -1,0 +1,10 @@
+streamlit
+openai
+PyPDF2
+python-dotenv
+streamlit-extras
+requests
+pandas
+st-aggrid
+aiohttp
+asyncio
