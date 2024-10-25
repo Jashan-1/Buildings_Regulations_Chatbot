@@ -126,6 +126,7 @@ def create_assistant():
 def format_response(response, citations):
     """Format the response with proper markdown structure."""
     formatted_text = f"""
+### Response
 {response}
 
 {"### Citations" if citations else ""}
@@ -135,6 +136,10 @@ def format_response(response, citations):
 
 def response_generator(response, citations):
     """Generator for streaming response with structured output."""
+    # First yield the response header
+    yield "### Response\n\n"
+    time.sleep(0.1)
+    
     # Yield the main response word by word
     words = response.split()
     for i, word in enumerate(words):
@@ -344,10 +349,9 @@ if page == "Home":
                 st.markdown(f"""
                 <div class="chat-message assistant">
                     <div><strong>Assistant</strong></div>
+                    <div class="message-content">{chat['content']}</div>
                 </div>
                 """, unsafe_allow_html=True)
-                # Use st.markdown to render the assistant's message content
-                st.markdown(chat['content'])
     st.markdown('</div>', unsafe_allow_html=True)
 
     # Inject JavaScript to auto-scroll the chat container
@@ -500,8 +504,6 @@ elif page == "Admin":
     st.write(json_vector_stores)
 
     # Add a button to go back to the main page
-
-
 
 
 
